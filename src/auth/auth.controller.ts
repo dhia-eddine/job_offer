@@ -26,6 +26,14 @@ export class AuthController {
   }
 
   @Public()
+  @Post('superadmin/sign-up')
+  async superadminSignUp(
+    @Body(ValidationPipe) authCredentialsDto: AuthCredentialsDto,
+  ): Promise<User> {
+    return this.authService.signUp(authCredentialsDto, UserRole.SUPERADMIN); 
+  }
+
+  @Public()
   @UseGuards(AuthGuard)
   @Post('sign-in')
   async signIn(
